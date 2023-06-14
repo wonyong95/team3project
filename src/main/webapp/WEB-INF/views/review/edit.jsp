@@ -44,9 +44,9 @@
             <a href="write">글쓰기</a>| <a href="list">글목록</a>
         <p>
 
-        <form name="bf" id="bf" role="form" action="write" method="post" >
+        <form name="bf" id="bf" role="form" method="post">
             <!-- hidden data---------------------------------  -->
-            <input type="hidden" name="num" value=""/>
+            <input type="hidden" name="review_id" id ="review_id" value="${vo.review_id}"/>
             <input type="hidden" name="mode" value="">
             <!-- 원본글쓰기: mode=> write
                  답변글쓰기: mode=> rewrite
@@ -57,32 +57,48 @@
                 <tr>
                     <td style="width:20%"><b>제목</b></td>
                     <td style="width:80%">
-                        <input type="text" name="subject" id="subject" class="form-control" value="${vo.review_title}">
+                        <input type="text" name="review_title" id="review_title" class="form-control" value="${vo.review_title}">
                     </td>
                 </tr>
 
                 <tr>
                     <td style="width:20%"><b>작성자</b></td>
                     <td style="width:80%">
-                        <input type="text" name="#" id="#" value="${vo.user_id}" readonly />
+                        <input type="text" name="user_id" id="user_id" value="${vo.user_id}" readonly />
                     </td>
                 </tr>
                 <tr>
                     <td style="width:20%"><b>글내용</b></td>
                     <td style="width:80%">
-                        <textarea name="content" id="bcontent" rows="10" cols="50" class="form-control">${vo.review_content}</textarea>
+                        <textarea name="review_content" id="review_content" rows="10" cols="50" class="form-control">${vo.review_content}</textarea>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="2" class="text-center">
-                        <button type="submit" id="btnWrite" class="btn btn-success">글수정</button>
-                        <button type="reset" id="btnReset" class="btn btn-warning">다시쓰기</button>
+                        <button id="update" onclick = "edit('update')" class="btn btn-success">글수정</button>
+                        <button id="delete" onclick = "edit('delete')" class="btn btn-warning">삭제</button>
+
                     </td>
+
                 </tr>
             </table>
         </form>
     </div><!-- .col end-->
 </div><!-- .row end-->
 </body>
+<script>
+    const edit = function(mode){
+        if(mode =='update'){
+            bf.action="/review/update";
+        }
+        else if (mode == 'delete'){
+            bf.action="/review/delete";
+
+            alert("해당 게시글을 삭제합니다");
+
+        }
+        bf.submit();
+    }
+</script>
 </html>

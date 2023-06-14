@@ -37,11 +37,24 @@
 </head>
 
 <body>
+<div class="row my-3">
+    <div class="col-12 text-center">
+        <h2>Spring Board</h2>
+        <c:if test="${paging.findType ne null and paging.findType ne ''}">
+            <h3 class="text-center text-secondary">검색어: <c:out value="${paging.Keyword}"/> </h3>
+        </c:if>
+
+        <p>
+            <a href="write">글쓰기</a>|<a href="list">글목록</a>
+        </p>
+    </div>
+</div>
 <div class="row my-5">
     <div class="col-12 text-center">
         <h2>상단바</h2>
     </div>
 </div>
+
 <div class="row my-3">
     <div class="col-9 text-right">
         <form name="searchF" action="/review/write" method="get" >
@@ -72,28 +85,28 @@
             <th width="10%">추천수</th>
             </thead>
             <tbody>
-            <%-- 테이블에 게시글이 없을 경우 --%>
-            <c:if test="${list eq null or empty list}">
-                <div class = "slert alert-danger">
-                    <h3>해당 글은 없습니다.</h3>
-                </div>
-            </c:if>
+                <%-- 테이블에 게시글이 없을 경우 --%>
+                <c:if test="${list eq null or empty list}">
+                    <div class = "slert alert-danger">
+                        <h3>해당 글은 없습니다.</h3>
+                    </div>
+                </c:if>
 
-            <%-- 테이블에 게시글이 있을 경우 --%>
-            <c:if test="${list ne null and not empty list}">
-                <c:forEach var="vo" items="${list}">
-                    <tr id="${vo.review_id}">
-                        <td width="10%"><c:out value="${vo.review_id}"/></td>
-                        <td width="10%"><c:out value="${vo.user_id}"/></td>
-                        <td width="20%"><c:out value="${vo.review_title}"/></td>
-                        <td width="20%"><c:out value="${vo.review_content}"/></td>
-                        <td width="10%"><c:out value="${vo.create_date}"/></td>
-                        <td width="10%"><c:out value="${vo.create_date}"/></td>
-                        <td width="10%"><c:out value="${vo.review_views}"/></td>
-                        <td width="10%"><c:out value="${vo.review_recommends}"/></td>
-                    </tr>
-                </c:forEach>
-            </c:if>
+                <%-- 테이블에 게시글이 있을 경우 --%>
+                <c:if test="${list ne null and not empty list}">
+                    <c:forEach var="vo" items="${list}">
+                        <tr id="${vo.review_id}">
+                                <td width="10%"><c:out value="${vo.review_id}"/></td>
+                                <td width="10%"><c:out value="${vo.user_id}"/></td>
+                                <td width="20%"><c:out value="${vo.review_title}"/></td>
+                                <td width="20%"><c:out value="${vo.review_content}"/></td>
+                                <td width="10%"><c:out value="${vo.create_date}"/></td>
+                                <td width="10%"><c:out value="${vo.create_date}"/></td>
+                                <td width="10%"><c:out value="${vo.review_views}"/></td>
+                                <td width="10%"><c:out value="${vo.review_recommends}"/></td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
             </tbody>
             <tfoot>
             <tr>

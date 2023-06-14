@@ -1,12 +1,12 @@
 package multi.backend.project.review.Service;
 
 import multi.backend.project.review.Mapper.reviewMapper;
+import multi.backend.project.review.VO.pagingVO;
 import multi.backend.project.review.VO.reviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service("reviewService")
 public class reviewServiceImpl implements reviewService {
@@ -20,8 +20,8 @@ public class reviewServiceImpl implements reviewService {
     }
 
     @Override
-    public List<reviewVO> selectReviewAll() {
-        return mapper.selectReviewAll();
+    public List<reviewVO> selectReviewAll(pagingVO paging) {
+        return mapper.selectReviewAll(paging);
     }
 
     @Override
@@ -31,21 +31,27 @@ public class reviewServiceImpl implements reviewService {
 
     @Override
     public int updateReview(reviewVO vo) {
-        return 0;
+        return mapper.updateReview(vo);
     }
 
     @Override
     public int deleteReview(int id) {
-        return 0;
+        return mapper.deleteReview(id);
     }
 
     @Override
-    public int updateReview_views(reviewVO boardVO) {
+    public int updateReview_views(reviewVO vo) {
         return 0;
     }
 
     @Override
     public int getTotalCount() {
         return this.mapper.getTotalCount();
+    }
+
+
+    @Override
+    public int getTotalCount(pagingVO paging) {
+        return this.mapper.getTotalCountpaging(paging);
     }
 }
